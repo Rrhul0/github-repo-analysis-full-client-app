@@ -1,6 +1,9 @@
-export default function ShowIssues(){
-    return(
-        <>
-            <div></div>
-        </>)
+/* eslint-disable react/prop-types */
+export default function ShowIssues(props) {
+  return (
+    <div>
+      Open Issues:
+      {props.open_issues}
+    </div>
+  );
 }
