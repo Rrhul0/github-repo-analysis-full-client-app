@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function ShowRepos({ setSelectedRepo }) {
     const [filtered, setFiltered] = useState([])
@@ -6,6 +6,12 @@ export default function ShowRepos({ setSelectedRepo }) {
     const [highLightedIndex, setHighlightedIndex] = useState(null)
     const [findingRepos, setFindingRepos] = useState(null)
     const [repos, setRepos] = useState([])
+
+    useEffect(() => {
+        const handler = () => setFiltered([])
+        window.addEventListener('click', handler)
+        return () => window.removeEventListener('click', handler)
+    }, [])
 
     async function onClickSearchUsername(e) {
         e.preventDefault()
@@ -126,6 +132,9 @@ export default function ShowRepos({ setSelectedRepo }) {
                     setHighlightedIndex(null)
                 }}
                 onClick={e => {
+                    //stop propogation to window as window click used to close menu
+                    e.stopPropagation()
+
                     const clickedRepoIndex = filtered.findIndex(repo => repo.name === e.target.textContent)
                     //if clicked on something other then repo name then index of that will be -1
                     if (clickedRepoIndex === -1) return
@@ -176,9 +185,6 @@ export default function ShowRepos({ setSelectedRepo }) {
                         })}
                         <li className={(filtered.length < repos.length ? 'block' : 'hidden') + ' text-center'}>
                             {filtered.length < repos.length ? repos.length - filtered.length : ''} More Repositories
-                        </li>
-                        <li className="text-center hover:bg-red-200" onClick={() => setFiltered([])}>
-                            Cancel!
                         </li>
                     </ul>
                 ) : (

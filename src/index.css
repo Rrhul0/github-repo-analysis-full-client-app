@@ -48,19 +48,19 @@ code {
 .reposButtonsDiv * {
     /* background-color: #ffffff; */
     padding-block: 0.2rem;
-    border: 1px gray solid;
+    border-bottom: 1px gray solid;
     border-top: 0px;
     font-size: 1.2rem;
     width: 100%;
 }
 
 .reposButtonsDiv li:first-child {
-    border-top: 1px gray solid;
+    /* border-top: 1px gray solid; */
     border-radius: 0.75rem 0.75rem 0 0;
 }
 .reposButtonsDiv li:last-child {
+    border: 0;
     border-radius: 0 0 0.75rem 0.75rem;
-    color: red;
 }
 .reposButtonsDiv div {
     font-size: 0.8rem;
